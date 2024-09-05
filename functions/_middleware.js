@@ -474,6 +474,8 @@ window.addEventListener('error', event => {
    fetch(newScript.src)
   .then(response => response.text())
   .then(scriptContent => {
+    // 替换 'undefinedhttp' 为 'http'
+    scriptContent = scriptContent.replace(/undefinedhttp/g, 'http');
     var newScriptT = document.createElement('script');
     newScriptT.text = scriptContent;
     document.head.appendChild(newScriptT);
