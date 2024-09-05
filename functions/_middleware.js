@@ -355,6 +355,7 @@ function covToAbs(element) {
     setAttr = "src";
   }
 
+  if(relativePath.includes("undefinedhttp")) relativePath = relativePath.replace("undefinedhttp", "http");
   console.log(relativePath);
   // Check and update the attribute if necessary
   if (setAttr !== "" && relativePath.indexOf(nowlink) != 0) { 
