@@ -63,6 +63,7 @@ function changeURL(relativePath){
       absolutePath = absolutePath.replace(base, original_host);
 
     absolutePath = nowlink + absolutePath;
+    if(absolutePath.startsWith("/undefined")) absolutePath = absolutePath.replace("/undefined", "/");
     return absolutePath;
   } catch (e) {
     console.log(path + "   " + relativePath);
