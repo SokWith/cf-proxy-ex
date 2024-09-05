@@ -1,13 +1,13 @@
-//export async function onRequestGet(context) {
-//  return context.env.PROXYWEB.fetch(context.request);
-//}
-
-export async function onRequest(context) {
-  const url = new URL(context.request.url);
-  const thisProxyServerUrlHttps = `${url.protocol}//${url.hostname}/`;
-  const thisProxyServerUrl_hostOnly = url.host;
-  return handleRequest(context.request);
+export async function onRequestGet(context) {
+  return context.env.PROXYWEB.fetch(context.request);
 }
+
+//export async function onRequest(context) {
+//  const url = new URL(context.request.url);
+//  const thisProxyServerUrlHttps = `${url.protocol}//${url.hostname}/`;
+//  const thisProxyServerUrl_hostOnly = url.host;
+//  return handleRequest(context.request);
+//}
 
 const str = "/";
 const proxyCookie = "__PROXY_VISITEDSITE__";
