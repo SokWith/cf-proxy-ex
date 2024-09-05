@@ -460,7 +460,7 @@ window.addEventListener('error', event => {
     var newScript = document.createElement('script');
     newScript.src = element.src;
 
-    console.log(newScript.src);
+    console.log('JS src:', newScript.src);
     if(newScript.src.includes("undefinedhttp")) newScript.src = newScript.src.replace("undefinedhttp", "http");
    
     
