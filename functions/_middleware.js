@@ -1,10 +1,11 @@
+//export async function onRequestGet(context) {
+//  return context.env.PROXYWEB.fetch(context.request);
+//}
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const thisProxyServerUrlHttps = `${url.protocol}//${url.hostname}/`;
   const thisProxyServerUrl_hostOnly = url.host;
-  //console.log(thisProxyServerUrlHttps);
-  //console.log(thisProxyServerUrl_hostOnly);
-
   return handleRequest(context.request);
 }
 
@@ -551,6 +552,15 @@ const redirectError = `
 async function handleRequest(request) {
   //获取所有cookie
   var siteCookie = request.headers.get('Cookie');
+  
+  let oldUA = request.headers.get('user-agent') || '';
+  const isMobile = oldUA.includes('Mobile') || oldUA.includes('Android');
+  if (isMobile) {
+      oldUA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.7 Mobile/15E148 Safari/605.1.15 BingSapphire/1.0.410427012';
+    } else {
+      oldUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35';
+    }
+
 
   
   if (password != "") {
@@ -630,8 +640,11 @@ async function handleRequest(request) {
       .replaceAll(thisProxyServerUrl_hostOnly, actualUrl.host);
   }
 
-  const modifiedRequest = new Request(actualUrl, {
-    headers: clientHeaderWithChange,
+  const newHeaders = new Headers(clientHeaderWithChange);
+  newHeaders.set('user-agent', oldUA);
+
+const modifiedRequest = new Request(actualUrl, {
+    headers: newHeaders,
     method: request.method,
     body: (request.body) ? clientRequestBodyWithChange : request.body,
     //redirect: 'follow'
@@ -643,6 +656,7 @@ async function handleRequest(request) {
   });
 
   //console.log(actualUrl);
+
 
   const response = await fetch(modifiedRequest);
   if (response.status.toString().startsWith("3") && response.headers.get("Location") != null) {
