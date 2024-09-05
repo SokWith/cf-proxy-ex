@@ -46,7 +46,7 @@ function changeURL(relativePath){
     //ignore
   }
   try {
-    var absolutePath = new URL(relativePath, path).href;
+    let absolutePath = new URL(relativePath, path).href;
     absolutePath = absolutePath.replace(window.location.href, path);
     absolutePath = absolutePath.replace(encodeURI(window.location.href), path);
     absolutePath = absolutePath.replace(encodeURIComponent(window.location.href), path);
