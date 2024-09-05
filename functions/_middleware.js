@@ -344,8 +344,8 @@ function traverseAndConvert(node) {
 
 
 function covToAbs(element) {
-  let relativePath = "";
-  let setAttr = "";
+  var relativePath = "";
+  var setAttr = "";
   if (element instanceof HTMLElement && element.hasAttribute("href")) {
     relativePath = element.getAttribute("href");
     setAttr = "href";
@@ -362,7 +362,7 @@ function covToAbs(element) {
     if (!relativePath.includes("*")) {
       if (!relativePath.startsWith("data:") && !relativePath.startsWith("javascript:") && !relativePath.startsWith("chrome") && !relativePath.startsWith("edge")) {
         try {
-          let absolutePath = changeURL(relativePath);
+          var absolutePath = changeURL(relativePath);
           console.log(absolutePath);
           element.setAttribute(setAttr, absolutePath);
         } catch (e) {
