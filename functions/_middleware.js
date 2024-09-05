@@ -460,12 +460,14 @@ window.addEventListener('error', event => {
     var newScript = document.createElement('script');
     newScript.src = element.src;
 
-    console.log('JS src:', newScript.src);
-    if(newScript.src.includes("undefinedhttp")) newScript.src = newScript.src.replace("undefinedhttp", "http");
+    
+    //if(newScript.src.includes("undefinedhttp")) newScript.src = newScript.src.replace("undefinedhttp", "http");
    
     
     newScript.async = element.async; // 保留原有的 async 属性
     newScript.defer = element.defer; // 保留原有的 defer 属性
+
+    console.log('JS src:', newScript);
 
     // 添加新的 script 元素到 document
     document.head.appendChild(newScript);
