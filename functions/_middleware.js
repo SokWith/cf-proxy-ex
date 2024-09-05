@@ -1,13 +1,13 @@
-export async function onRequestGet(context) {
-  return context.env.PROXYWEB.fetch(context.request);
-}
-
-//export async function onRequest(context) {
-//  const url = new URL(context.request.url);
-//  const thisProxyServerUrlHttps = `${url.protocol}//${url.hostname}/`;
-//  const thisProxyServerUrl_hostOnly = url.host;
-//  return handleRequest(context.request);
+//export async function onRequestGet(context) {
+//  return context.env.PROXYWEB.fetch(context.request);
 //}
+
+export async function onRequest(context) {
+  const url = new URL(context.request.url);
+  const thisProxyServerUrlHttps = `${url.protocol}//${url.hostname}/`;
+  const thisProxyServerUrl_hostOnly = url.host;
+  return handleRequest(context.request);
+}
 
 const str = "/";
 const proxyCookie = "__PROXY_VISITEDSITE__";
@@ -554,8 +554,8 @@ async function handleRequest(request) {
   var siteCookie = request.headers.get('Cookie');
   
   let oldUA = request.headers.get('user-agent') || '';
-  const isMobile = oldUA.includes('Mobile') || oldUA.includes('Android');
-  if (isMobile) {
+  let isMobile = oldUA.includes('Mobile') || oldUA.includes('Android');
+  if (isMobile = false) {
       oldUA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.7 Mobile/15E148 Safari/605.1.15 BingSapphire/1.0.410427012';
     } else {
       oldUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35';
