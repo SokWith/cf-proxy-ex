@@ -459,6 +459,11 @@ window.addEventListener('error', event => {
     // 创建新的 script 元素
     var newScript = document.createElement('script');
     newScript.src = element.src;
+
+    console.log(newScript.src);
+    if(newScript.src.includes("undefinedhttp")) newScript.src = newScript.src.replace("undefinedhttp", "http");
+   
+    
     newScript.async = element.async; // 保留原有的 async 属性
     newScript.defer = element.defer; // 保留原有的 defer 属性
 
