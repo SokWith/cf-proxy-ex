@@ -461,7 +461,7 @@ window.addEventListener('error', event => {
     newScript.src = element.src;
 
     
-    //if(newScript.src.includes("undefinedhttp")) newScript.src = newScript.src.replace("undefinedhttp", "http");
+    if(newScript.src.includes("undefinedhttp")) newScript.src = newScript.src.replace("undefinedhttp", "http");
    
     
     newScript.async = element.async; // 保留原有的 async 属性
