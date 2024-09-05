@@ -467,10 +467,19 @@ window.addEventListener('error', event => {
     newScript.async = element.async; // 保留原有的 async 属性
     newScript.defer = element.defer; // 保留原有的 defer 属性
 
-    console.log('JS src:', newScript);
+    //console.log('JS src:', newScript);
 
     // 添加新的 script 元素到 document
-    document.head.appendChild(newScript);
+   // document.head.appendChild(newScript);
+   fetch(newScript.src)
+  .then(response => response.text())
+  .then(scriptContent => {
+    var newScriptT = document.createElement('script');
+    newScriptT.text = scriptContent;
+    document.head.appendChild(newScriptT);
+  })
+  .catch(error => console.error('Error loading script:', error));
+
 
     console.log('New script added:', newScript);
   }
