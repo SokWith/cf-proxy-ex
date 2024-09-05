@@ -355,6 +355,7 @@ function covToAbs(element) {
     setAttr = "src";
   }
 
+  console.log(relativePath);
   // Check and update the attribute if necessary
   if (setAttr !== "" && relativePath.indexOf(nowlink) != 0) { 
     if (!relativePath.includes("*")) {
